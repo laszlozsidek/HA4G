@@ -2,21 +2,19 @@ package com.zsidek.tests;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.zsidek.driver.Driver;
-import com.zsidek.pages.*;
+import com.zsidek.pages.saucedemo.*;
 import com.zsidek.utils.ResourceReader;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.zsidek.pages.InventoryPage.INVENTORY_ITEM_BUTTON_FORMAT;
+import static com.zsidek.pages.saucedemo.InventoryPage.INVENTORY_ITEM_BUTTON_FORMAT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@Slf4j
-public class LoginPageTest {
+public class C1AutomatePurchaseProcessTest {
     private final WebDriver driver = Driver.getInstance();
     private LoginPage loginPage;
     private InventoryPage inventoryPage;
@@ -41,7 +39,7 @@ public class LoginPageTest {
     }
 
     @Test
-    public void navigationToAllTools() {
+    public void automatePurchaseProcess() {
         JsonNode jsonNode = ResourceReader.getJsonNode("credential.json");
         assertNotNull(jsonNode, "Failed to load credentials from JSON.");
         loginPage.inputUserName.sendKeys(jsonNode.get("username").asText());

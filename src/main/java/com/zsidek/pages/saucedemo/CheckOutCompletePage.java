@@ -1,5 +1,6 @@
-package com.zsidek.pages;
+package com.zsidek.pages.saucedemo;
 
+import com.zsidek.pages.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
