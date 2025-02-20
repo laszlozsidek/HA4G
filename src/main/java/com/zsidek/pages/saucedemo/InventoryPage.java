@@ -11,7 +11,7 @@ public class InventoryPage extends BasePage {
     @FindBy(xpath = "//span[@data-test='shopping-cart-badge']")
     public WebElement counterShoppingCart;
 
-    @FindBy(xpath = "//div[@data-test='shopping-cart-link']")
+    @FindBy(xpath = "//a[@data-test='shopping-cart-link']")
     public WebElement iconShoppingCart;
 
     @FindBy(xpath = "//div[@data-test='footer-copy']")

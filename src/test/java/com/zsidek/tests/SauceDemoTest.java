@@ -1,21 +1,21 @@
 package com.zsidek.tests;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.zsidek.driver.Driver;
 import com.zsidek.pages.saucedemo.*;
-import com.zsidek.utils.ResourceReader;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import static com.zsidek.pages.saucedemo.InventoryPage.INVENTORY_ITEM_BUTTON_FORMAT;
+import static com.zsidek.utils.ResourceReader.getValueFromJsonNode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class C1AutomatePurchaseProcessTest {
-    private final WebDriver driver = Driver.getInstance();
+public class SauceDemoTest {
+    private static final WebDriver driver = Driver.getInstance();
     private LoginPage loginPage;
     private InventoryPage inventoryPage;
     private CartPage cartPage;
@@ -33,17 +33,16 @@ public class C1AutomatePurchaseProcessTest {
         checkOutCompletePage = new CheckOutCompletePage();
     }
 
-    @AfterEach
-    public void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         driver.quit();
     }
 
     @Test
     public void automatePurchaseProcess() {
-        JsonNode jsonNode = ResourceReader.getJsonNode("credential.json");
-        assertNotNull(jsonNode, "Failed to load credentials from JSON.");
-        loginPage.inputUserName.sendKeys(jsonNode.get("username").asText());
-        loginPage.inputPassword.sendKeys(jsonNode.get("password").asText());
+        String resource = "credential.json";
+        loginPage.inputUserName.sendKeys(getValueFromJsonNode(resource, "username"));
+        loginPage.inputPassword.sendKeys(getValueFromJsonNode(resource, "password"));
         loginPage.buttonLogin.click();
 
         driver.findElement(By.xpath(String.format(INVENTORY_ITEM_BUTTON_FORMAT, "Sauce Labs Backpack"))).click();
@@ -62,4 +61,24 @@ public class C1AutomatePurchaseProcessTest {
 
         assertEquals("Thank you for your order!", checkOutCompletePage.textCompleted.getText());
     }
+
+    @Test
+    public void verifyErrorMessagesForMandatoryFields() {
+        loginPage.buttonLogin.click();
+
+        assertEquals("Epic sadface: Username is required", loginPage.messageError.getText());
+
+        String resource = "credential2.json";
+        loginPage.inputUserName.sendKeys(getValueFromJsonNode(resource, "username"));
+        loginPage.inputPassword.sendKeys(getValueFromJsonNode(resource, "password"));
+        loginPage.buttonLogin.click();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+
+        String footerText = inventoryPage.textFooter.getText();
+
+        assertTrue(footerText.contains("2025") && footerText.contains("Terms of Service"));
+    }
+
 }

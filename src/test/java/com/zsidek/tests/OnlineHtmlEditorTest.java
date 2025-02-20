@@ -3,15 +3,15 @@ package com.zsidek.tests;
 import com.zsidek.driver.Driver;
 import com.zsidek.pages.onlinehtmleditor.StartPage;
 import com.zsidek.utils.StringUtil;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class C3RichTextEditorTest {
-    private final WebDriver driver = Driver.getInstance();
+public class OnlineHtmlEditorTest {
+    private static final WebDriver driver = Driver.getInstance();
     private StartPage startPage;
 
     @BeforeEach
@@ -19,8 +19,8 @@ public class C3RichTextEditorTest {
         startPage = new StartPage("https://onlinehtmleditor.dev/");
     }
 
-    @AfterEach
-    public void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         driver.quit();
     }
 

@@ -8,6 +8,7 @@ public class BasePage {
 
     public BasePage(String url) {
         WebDriver driver = Driver.getInstance();
+        driver.manage().deleteAllCookies();
         if (url != null) {
             driver.get(url);
         }

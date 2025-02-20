@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 @Slf4j
 public class ResourceReader {
@@ -22,6 +23,10 @@ public class ResourceReader {
             log.error(e.getMessage());
         }
         return null;
+    }
+
+    public static String getValueFromJsonNode(String fileName, String key) {
+        return Objects.requireNonNull(getJsonNode(fileName)).get(key).asText();
     }
 
 }
