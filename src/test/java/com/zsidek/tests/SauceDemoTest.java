@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import static com.zsidek.pages.saucedemo.InventoryPage.INVENTORY_ITEM_BUTTON_FORMAT;
@@ -73,8 +72,7 @@ public class SauceDemoTest {
         loginPage.inputPassword.sendKeys(getValueFromJsonNode(resource, "password"));
         loginPage.buttonLogin.click();
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+        loginPage.scrollToElement(inventoryPage.textFooter);
 
         String footerText = inventoryPage.textFooter.getText();
 
