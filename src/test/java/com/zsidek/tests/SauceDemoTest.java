@@ -46,7 +46,7 @@ public class SauceDemoTest {
 
         driver.findElement(By.xpath(String.format(INVENTORY_ITEM_BUTTON_FORMAT, "Sauce Labs Backpack"))).click();
         driver.findElement(By.xpath(String.format(INVENTORY_ITEM_BUTTON_FORMAT, "Sauce Labs Fleece Jacket"))).click();
-        assertEquals("2", inventoryPage.counterShoppingCart.getText());
+        assertEquals("2", inventoryPage.counterShoppingCart.getText(), "Counter should be 2");
         inventoryPage.iconShoppingCart.click();
 
         cartPage.buttonCheckout.click();
@@ -58,14 +58,16 @@ public class SauceDemoTest {
 
         checkOutStep2Page.buttonFinish.click();
 
-        assertEquals("Thank you for your order!", checkOutCompletePage.textCompleted.getText());
+        assertEquals("Thank you for your order!",
+                checkOutCompletePage.textCompleted.getText(),
+                "Text should be as expected");
     }
 
     @Test
     public void verifyErrorMessagesForMandatoryFields() {
         loginPage.buttonLogin.click();
 
-        assertEquals("Epic sadface: Username is required", loginPage.messageError.getText());
+        assertEquals("Epic sadface: Username is required", loginPage.messageError.getText(), "Text should be as expected");
 
         String resource = "credential2.json";
         loginPage.inputUserName.sendKeys(getValueFromJsonNode(resource, "username"));
@@ -76,7 +78,8 @@ public class SauceDemoTest {
 
         String footerText = inventoryPage.textFooter.getText();
 
-        assertTrue(footerText.contains("2025") && footerText.contains("Terms of Service"));
+        assertTrue(footerText.contains("2025") && footerText.contains("Terms of Service"),
+                "Footer text should contain correct text");
     }
 
 }

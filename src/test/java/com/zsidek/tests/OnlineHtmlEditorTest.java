@@ -34,6 +34,9 @@ public class OnlineHtmlEditorTest {
         startPage.buttonUnderline.click();
         startPage.textboxEditor.sendKeys(" Example");
 
-        assertEquals("Automation Test Example", StringUtil.normalizeString(startPage.textboxEditor.getText()));
+        assertEquals("Automation Test Example",
+                StringUtil.normalizeString(startPage.textboxEditor.getText()),
+                "Textbox should contain expected text"
+        );
     }
 }

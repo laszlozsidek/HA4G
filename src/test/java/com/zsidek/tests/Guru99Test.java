@@ -34,7 +34,7 @@ public class Guru99Test {
     public void handleIFrameAndTab() {
         demoPage.scrollToElement(demoPage.iFrame);
 
-        driver.switchTo().frame("a077aa5e");
+        driver.switchTo().frame(demoPage.iFrame);
         demoPage.imageOfIframe.click();
 
         Set<String> handles = driver.getWindowHandles();
@@ -50,12 +50,12 @@ public class Guru99Test {
         String popupMessage = driver.switchTo().alert().getText();
         driver.switchTo().alert().accept();
 
-        assertTrue(popupMessage.contains("Successfully"));
+        assertTrue(popupMessage.contains("Successfully"), "Popup message should contain 'Successfully'");
 
         demoPage.scrollToElement(demoPage.navigation);
         demoPage.dropdownSelenium.click();
         demoPage.menuItemTooltip.click();
 
-        assertTrue(tooltipPage.buttonDownloadNow.isDisplayed());
+        assertTrue(tooltipPage.buttonDownloadNow.isDisplayed(), "Button should be displayed");
     }
 }
