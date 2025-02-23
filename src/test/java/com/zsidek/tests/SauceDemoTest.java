@@ -2,6 +2,9 @@ package com.zsidek.tests;
 
 import com.zsidek.driver.Driver;
 import com.zsidek.pages.saucedemo.*;
+import com.zsidek.utils.StringConstants;
+import com.zsidek.utils.TestDataProvider;
+import com.zsidek.utils.model.TestUser;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SauceDemoTest {
+
     private static final WebDriver driver = Driver.getInstance();
     private LoginPage loginPage;
     private InventoryPage inventoryPage;
@@ -39,20 +43,21 @@ public class SauceDemoTest {
     @Test
     public void automatePurchaseProcess() {
         String resource = "credential.json";
-        loginPage.inputUserName.sendKeys(getValueFromJsonNode(resource, "username"));
-        loginPage.inputPassword.sendKeys(getValueFromJsonNode(resource, "password"));
+        loginPage.inputUserName.sendKeys(getValueFromJsonNode(resource, StringConstants.USERNAME));
+        loginPage.inputPassword.sendKeys(getValueFromJsonNode(resource, StringConstants.PASSWORD));
         loginPage.buttonLogin.click();
 
-        inventoryPage.findElementByFormat(INVENTORY_ITEM_BUTTON_FORMAT, "Sauce Labs Backpack").click();
-        inventoryPage.findElementByFormat(INVENTORY_ITEM_BUTTON_FORMAT, "Sauce Labs Fleece Jacket").click();
+        inventoryPage.findElementByFormat(INVENTORY_ITEM_BUTTON_FORMAT, TestDataProvider.provideCartItemsC1().get(0)).click();
+        inventoryPage.findElementByFormat(INVENTORY_ITEM_BUTTON_FORMAT, TestDataProvider.provideCartItemsC1().get(1)).click();
         assertEquals("2", inventoryPage.counterShoppingCart.getText(), "Counter should be 2");
         inventoryPage.iconShoppingCart.click();
 
         cartPage.buttonCheckout.click();
 
-        checkOutStep1Page.inputFirstName.sendKeys("John");
-        checkOutStep1Page.inputLastName.sendKeys("Smith");
-        checkOutStep1Page.inputPostalCode.sendKeys("12345");
+        TestUser testUser = TestDataProvider.provideValidUserDataC1();
+        checkOutStep1Page.inputFirstName.sendKeys(testUser.getFirstName());
+        checkOutStep1Page.inputLastName.sendKeys(testUser.getLastName());
+        checkOutStep1Page.inputPostalCode.sendKeys(testUser.getPostalCode());
         checkOutStep1Page.buttonContinue.click();
 
         checkOutStep2Page.buttonFinish.click();
@@ -69,8 +74,8 @@ public class SauceDemoTest {
         assertEquals("Epic sadface: Username is required", loginPage.messageError.getText(), "Text should be as expected");
 
         String resource = "credential2.json";
-        loginPage.inputUserName.sendKeys(getValueFromJsonNode(resource, "username"));
-        loginPage.inputPassword.sendKeys(getValueFromJsonNode(resource, "password"));
+        loginPage.inputUserName.sendKeys(getValueFromJsonNode(resource, StringConstants.USERNAME));
+        loginPage.inputPassword.sendKeys(getValueFromJsonNode(resource, StringConstants.PASSWORD));
         loginPage.buttonLogin.click();
 
         loginPage.scrollToElement(inventoryPage.textFooter);

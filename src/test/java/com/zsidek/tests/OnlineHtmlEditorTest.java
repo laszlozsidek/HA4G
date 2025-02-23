@@ -3,6 +3,7 @@ package com.zsidek.tests;
 import com.zsidek.driver.Driver;
 import com.zsidek.pages.onlinehtmleditor.StartPage;
 import com.zsidek.utils.StringUtil;
+import com.zsidek.utils.TestDataProvider;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,12 +28,12 @@ public class OnlineHtmlEditorTest {
     @Test
     public void verifyErrorMessagesForMandatoryFields() {
         startPage.buttonBold.click();
-        startPage.textboxEditor.sendKeys("Automation ");
+        startPage.textboxEditor.sendKeys(TestDataProvider.provideTextC3().get(0));
         startPage.buttonBold.click();
         startPage.buttonUnderline.click();
-        startPage.textboxEditor.sendKeys("Test");
+        startPage.textboxEditor.sendKeys(TestDataProvider.provideTextC3().get(1));
         startPage.buttonUnderline.click();
-        startPage.textboxEditor.sendKeys(" Example");
+        startPage.textboxEditor.sendKeys(TestDataProvider.provideTextC3().get(2));
 
         assertEquals("Automation Test Example",
                 StringUtil.normalizeString(startPage.textboxEditor.getText()),

@@ -1,11 +1,12 @@
 package com.zsidek.pages;
 
 import com.zsidek.driver.Driver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class BasePage {
 
@@ -28,6 +29,20 @@ public class BasePage {
 
     public WebElement findElementByFormat(String format, String value) {
         return Driver.getInstance().findElement(By.xpath(String.format(format, value)));
+    }
+
+    public void switchToFrame(WebElement frame) {
+        Driver.getInstance().switchTo().frame(frame);
+    }
+
+    public WebDriver switchToWindowByIndex(int index) {
+        Set<String> handles = Driver.getInstance().getWindowHandles();
+        List<String> tabs = new ArrayList<>(handles);
+        return Driver.getInstance().switchTo().window(tabs.get(index));
+    }
+
+    public Alert switchToAlert() {
+        return Driver.getInstance().switchTo().alert();
     }
 
 }
