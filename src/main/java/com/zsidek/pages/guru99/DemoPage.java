@@ -15,7 +15,7 @@ public class DemoPage extends BasePage {
     @FindBy(xpath = "//a[normalize-space()='Tooltip']")
     public WebElement menuItemTooltip;
 
-    @FindBy(xpath = "//iframe[@id='a077aa5e']")
+    @FindBy(id = "a077aa5e")
     public WebElement iFrame;
 
     @FindBy(xpath = "//body//a")
@@ -24,10 +24,10 @@ public class DemoPage extends BasePage {
     @FindBy(xpath = "//h3[contains(text(),'Email')]")
     public WebElement textEmail;
 
-    @FindBy(xpath = "//input[@id='philadelphia-field-email']")
+    @FindBy(id = "philadelphia-field-email")
     public WebElement inputEmail;
 
-    @FindBy(xpath = "//button[@id='philadelphia-field-submit']")
+    @FindBy(id = "philadelphia-field-submit")
     public WebElement buttonSubmit;
 
     public DemoPage(String url) {

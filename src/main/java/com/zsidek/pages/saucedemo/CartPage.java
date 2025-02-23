@@ -6,10 +6,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class CartPage extends BasePage {
 
-    @FindBy(xpath = "//button[@id='checkout']")
+    @FindBy(id = "checkout")
     public WebElement buttonCheckout;
 
     public CartPage() {
         super();
     }
+
 }

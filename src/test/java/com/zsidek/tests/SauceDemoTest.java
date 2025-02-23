@@ -5,7 +5,6 @@ import com.zsidek.pages.saucedemo.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static com.zsidek.pages.saucedemo.InventoryPage.INVENTORY_ITEM_BUTTON_FORMAT;
@@ -44,8 +43,8 @@ public class SauceDemoTest {
         loginPage.inputPassword.sendKeys(getValueFromJsonNode(resource, "password"));
         loginPage.buttonLogin.click();
 
-        driver.findElement(By.xpath(String.format(INVENTORY_ITEM_BUTTON_FORMAT, "Sauce Labs Backpack"))).click();
-        driver.findElement(By.xpath(String.format(INVENTORY_ITEM_BUTTON_FORMAT, "Sauce Labs Fleece Jacket"))).click();
+        inventoryPage.findElementByFormat(INVENTORY_ITEM_BUTTON_FORMAT, "Sauce Labs Backpack").click();
+        inventoryPage.findElementByFormat(INVENTORY_ITEM_BUTTON_FORMAT, "Sauce Labs Fleece Jacket").click();
         assertEquals("2", inventoryPage.counterShoppingCart.getText(), "Counter should be 2");
         inventoryPage.iconShoppingCart.click();
 

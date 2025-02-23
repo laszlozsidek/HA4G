@@ -20,4 +20,5 @@ public class InventoryPage extends BasePage {
     public InventoryPage() {
         super();
     }
+
 }

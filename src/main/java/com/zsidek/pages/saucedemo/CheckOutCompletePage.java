@@ -12,4 +12,5 @@ public class CheckOutCompletePage extends BasePage {
     public CheckOutCompletePage() {
         super();
     }
+
 }

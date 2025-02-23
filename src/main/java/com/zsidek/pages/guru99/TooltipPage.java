@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class TooltipPage extends BasePage {
 
-    @FindBy(xpath = "//a[@id='download_now']")
+    @FindBy(id = "download_now")
     public WebElement buttonDownloadNow;
 
     public TooltipPage() {

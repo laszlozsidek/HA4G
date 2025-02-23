@@ -1,6 +1,7 @@
 package com.zsidek.pages;
 
 import com.zsidek.driver.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +24,10 @@ public class BasePage {
 
     public void scrollToElement(WebElement element) {
         ((JavascriptExecutor) Driver.getInstance()).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public WebElement findElementByFormat(String format, String value) {
+        return Driver.getInstance().findElement(By.xpath(String.format(format, value)));
     }
 
 }

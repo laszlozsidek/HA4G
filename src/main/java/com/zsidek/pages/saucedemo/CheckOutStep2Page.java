@@ -6,10 +6,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class CheckOutStep2Page extends BasePage {
 
-    @FindBy(xpath = "//button[@id='finish']")
+    @FindBy(id = "finish")
     public WebElement buttonFinish;
 
     public CheckOutStep2Page() {
         super();
     }
+
 }

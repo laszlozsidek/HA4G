@@ -23,11 +23,11 @@ public class APITest {
 
             JsonArray jsonArray = JsonUtil.getJsonArray(response);
 
-            jsonArray.forEach(jsonElement -> {
-                String name = JsonUtil.getJsonValueByKey(jsonElement, "name");
-                String email = JsonUtil.getJsonValueByKey(jsonElement, "email");
-                System.out.printf("%s\t|%s\t%n", name, email);
-            });
+            jsonArray.forEach(e ->
+                    System.out.printf("%s\t|%s\t%n",
+                            JsonUtil.getJsonValueByKey(e, "name"),
+                            JsonUtil.getJsonValueByKey(e, "email"))
+            );
 
             assertTrue(jsonArray.get(0).getAsJsonObject().get("email").getAsString().contains("@"),
                     "Email of first item should contain @");
