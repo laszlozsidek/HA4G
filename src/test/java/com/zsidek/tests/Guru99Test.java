@@ -7,13 +7,11 @@ import com.zsidek.utils.TestDataProvider;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 
 import static com.zsidek.pages.guru99.DemoPage.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Guru99Test {
-    private static final WebDriver driver = Driver.getInstance();
 
     private DemoPage demoPage;
     private TooltipPage tooltipPage;
@@ -26,12 +24,11 @@ public class Guru99Test {
 
     @AfterAll
     public static void tearDown() {
-        driver.quit();
+        Driver.getInstance().quit();
     }
 
     @Test
     public void handleIFrameAndTab() {
-
         demoPage.scrollToElement(demoPage.iFrame);
 
         demoPage.switchToFrame(demoPage.iFrame);
@@ -53,6 +50,5 @@ public class Guru99Test {
         demoPage.selectOptionOnDropDown(SELENIUM, TOOLTIP);
 
         assertTrue(tooltipPage.buttonDownloadNow.isDisplayed(), "Button should be displayed");
-
     }
 }

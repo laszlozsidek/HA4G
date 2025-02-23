@@ -7,12 +7,11 @@ import com.zsidek.utils.TestDataProvider;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OnlineHtmlEditorTest {
-    private static final WebDriver driver = Driver.getInstance();
+
     private StartPage startPage;
 
     @BeforeEach
@@ -22,7 +21,7 @@ public class OnlineHtmlEditorTest {
 
     @AfterAll
     public static void tearDown() {
-        driver.quit();
+        Driver.getInstance().quit();
     }
 
     @Test

@@ -3,7 +3,6 @@ package com.zsidek.tests;
 import com.google.gson.JsonArray;
 import com.zsidek.api.OkHttp;
 import com.zsidek.utils.JsonUtil;
-import com.zsidek.utils.StringConstants;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;
 import org.junit.jupiter.api.AfterEach;
@@ -12,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+import static com.zsidek.utils.StringConstants.EMAIL;
+import static com.zsidek.utils.StringConstants.NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -39,11 +40,11 @@ public class APITest {
 
         jsonArray.forEach(e ->
                 log.info("{}\t|\t{}",
-                        JsonUtil.getJsonValueByKey(e, StringConstants.NAME),
-                        JsonUtil.getJsonValueByKey(e, StringConstants.EMAIL))
+                        JsonUtil.getJsonValueByKey(e, NAME),
+                        JsonUtil.getJsonValueByKey(e, EMAIL))
         );
 
-        assertTrue(jsonArray.get(0).getAsJsonObject().get(StringConstants.EMAIL).getAsString().contains("@"),
+        assertTrue(jsonArray.get(0).getAsJsonObject().get(EMAIL).getAsString().contains("@"),
                 "Email of first item should contain @");
     }
 
